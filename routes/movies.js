@@ -9,14 +9,22 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  //validating the obj that we send in the request
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const genre = await Genre.findById(req.body.genreId);
+  //check the id that the client send
   if (!genre) return res.status(400).send("Invalid genre.");
 
   let movie = new Movie({
     title: req.body.title,
+    // genre:genre ..cz this genre object also have a genre property
+    //that is set by mongo that we dont want to put here
+    // aslo this object could contain a lot of properties
+    //and we dont wanna store all those properties here
+    // when embedding that document inside of our movie document.
+    //so we set those property by selected them.
     genre: {
       _id: genre._id,
       name: genre.name,

@@ -2,7 +2,13 @@ const Joi = require("joi");
 const mongoose = require("mongoose");
 const { genreSchema } = require("./genre");
 
-//define the shape of document in the collection
+/*
+define the shape of document in the collection
+mongo schema
+what we have here is the representation of our model in
+ the application that's our persistent model thats what were going
+to store as document in mongodb
+*/
 const Movie = mongoose.model(
   "Movie",
   new mongoose.Schema({
@@ -33,6 +39,7 @@ const Movie = mongoose.model(
 );
 // validation when user send a data
 function validateMovie(movie) {
+  // what we here is what the client sends us
   const schema = {
     title: Joi.string().min(5).max(50).required(),
     genreId: Joi.string().required(),
