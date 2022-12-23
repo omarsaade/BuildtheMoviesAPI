@@ -14,6 +14,7 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
+  // -   yaane kbir lal sgir
   const rentals = await Rental.find().sort("-dateOut");
   res.send(rentals);
 });
@@ -43,9 +44,23 @@ router.post("/", async (req, res) => {
       dailyRentalRate: movie.dailyRentalRate,
     },
   });
+  //1
   rental = await rental.save();
-
+  // here we could have a problem..we have 2 separate operations
+  // its possible that after we save the rental something goes wrong
+  //maybe our server crushes or connection to mongodb drops.
+  //so perhaps the second operation will not complete
+  // that's were we need a transaction
+  // so with transaction we can ensure that both these operations
+  //will update the state of our data in database or none of them
+  //will be applied. so they are atomic they both complete or they both
+  //role back
+  // concept of transaction
+  // in mongodb we dont have this concept..there is technique that called
+  // two face commit which is beyond
+  // so lets see a npm package that simulate a transaction in mongoose
   movie.numberInStock--;
+  //2
   movie.save();
 
   res.send(rental);
