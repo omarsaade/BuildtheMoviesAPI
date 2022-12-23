@@ -1,3 +1,11 @@
+/*
+
+
+                    Hybird Approach
+
+
+*/
+
 const { Movie, validate } = require("../models/movie");
 const { Genre } = require("../models/genre");
 const express = require("express");
@@ -98,3 +106,6 @@ let movie = {
   },
 };
 */
+
+// POST /api/rentals/
+// GET /api/rentals

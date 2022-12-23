@@ -1,3 +1,11 @@
+/*
+
+
+                    Hybird Approach
+
+
+*/
+
 const Joi = require("joi");
 const mongoose = require("mongoose");
 const { genreSchema } = require("./genre");
@@ -55,7 +63,7 @@ exports.validate = validateMovie;
 
 // createMovie("Terminator", "63a4a3c09220403918c4cc19"); ref
 // createMovie("Fast Five", new Genre({ name: "Action" })); emb
-// createMovie("Dangerous","63a5ad51546ae031b4c86d95")
+// createMovie("Dangerous","63a5ad51546ae031b4c86d95") hybrid
 
 // 3-Hybrid approach
 /*
