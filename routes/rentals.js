@@ -25,8 +25,16 @@ router.get("/", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
+  // el afdal na3mul kell el validation bi he
   const { error } = validate(req.body);
   if (error) return res.status(400).send(error.details[0].message);
+
+  // mnesta3mel joi obj package library badal he el validation tahet
+  // mishen ma n3ida kell shway lal customerID w lal movieID
+  // w he tab3an bad approach to solve this problem
+  // if (!mongoose.Types.ObjectId.isValid(req.body.customerId)) {
+  //   return res.status(400).send("Invalid customer.");
+  // }
 
   const customer = await Customer.findById(req.body.customerId);
 

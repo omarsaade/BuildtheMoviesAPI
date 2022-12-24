@@ -20,6 +20,18 @@ router.post("/", async (req, res) => {
   customer = await customer.save();
 
   res.send(customer);
+  /*
+or 
+ const customer = new Customer({
+    name: req.body.name,
+    isGold: req.body.isGold,
+    phone: req.body.phone,
+  });
+  await customer.save();
+
+  res.send(customer);
+
+  */
 });
 
 router.put("/:id", async (req, res) => {

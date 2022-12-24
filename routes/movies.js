@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
   //check the id that the client send
   if (!genre) return res.status(400).send("Invalid genre.");
 
-  let movie = new Movie({
+  const movie = new Movie({
     title: req.body.title,
     // genre:genre ..cz this genre object also have a genre property
     //that is set by mongo that we dont want to put here
@@ -40,7 +40,9 @@ router.post("/", async (req, res) => {
     numberInStock: req.body.numberInStock,
     dailyRentalRate: req.body.dailyRentalRate,
   });
-  movie = await movie.save();
+  // this approach is better..no need to reset the movie =..
+  // .. it was only for desmonstrating
+  await movie.save();
 
   res.send(movie);
 });
