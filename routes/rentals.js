@@ -15,6 +15,7 @@ const Fawn = require("fawn");
 const express = require("express");
 const router = express.Router();
 
+//initialize method
 Fawn.init(mongoose);
 
 router.get("/", async (req, res) => {
@@ -28,6 +29,7 @@ router.post("/", async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const customer = await Customer.findById(req.body.customerId);
+
   if (!customer) return res.status(400).send("Invalid customer.");
 
   const movie = await Movie.findById(req.body.movieId);
@@ -48,12 +50,15 @@ router.post("/", async (req, res) => {
       dailyRentalRate: movie.dailyRentalRate,
     },
   });
+  //1
   // rental = await rental.save();
 
   // movie.numberInStock--;
+  //2
   // movie.save();
 
   try {
+    //create task object
     new Fawn.Task()
       .save("rentals", rental)
       .update(
